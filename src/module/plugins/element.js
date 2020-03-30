@@ -1,7 +1,10 @@
 import Vue from 'vue';
 import {
+    Aside, // element -Aside
     Button, // element - Button
     Badge, // element - Badge
+    Breadcrumb, // element - Breadcrumb
+    BreadcrumbItem, // element - BreadcrumbItem
     Col, // element - Col
     Container, // element - Container
     Checkbox, // element - Checkbox
@@ -55,8 +58,11 @@ import {
 } from 'element-ui';
 
 [
+    Aside, // element -Aside
     Button, // element - Button
     Badge, // element - Badge
+    Breadcrumb, // element - Breadcrumb
+    BreadcrumbItem, // element - BreadcrumbItem
     Col, // element - Col
     Container, // element - Container
     Checkbox, // element - Checkbox

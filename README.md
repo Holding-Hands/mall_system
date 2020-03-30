@@ -23,3 +23,5 @@ import ElementUI from 'element-ui'
 npm install babel-plugin-component -D
 babel.config.js里配置element样式
 ### 创建vue.config.js 设置别名
+
+### :default-active="$route.path" 点那个列表高亮哪个

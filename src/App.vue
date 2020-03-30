@@ -4,6 +4,9 @@
   </div>
 </template>
 
-<style lang="less">
+<style lang="less" scoped>
   @import "assets/css/normalize.css";
+  #app {
+    height: 100vh;
+  }
 </style>
