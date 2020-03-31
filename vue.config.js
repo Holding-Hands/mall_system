@@ -10,6 +10,7 @@ module.exports={
             .set('network',resolve('./src/network'))
             .set('assets',resolve('./src/assets'))
             .set('common',resolve('./src/common'))
+            .set('utils',resolve('./src/utils'))
         //set第一个参数：设置的别名，第二个参数：设置的路径
     },
     devServer: {

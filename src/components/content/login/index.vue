@@ -3,15 +3,27 @@
   <div id="login">
     <h1 class="title">电商后台管理系统</h1>
     <div class="content">
-      <el-form class="el-form" :rules="rules" :model="form" ref="loginForm">
+      <el-form class="el-form" :rules="rules" :model="form" ref="loginForm" >
+
         <!--  账号-->
         <el-form-item label="账 号" prop="username">
-          <el-input v-model="form.username" prefix-icon="iconfont icon-yonghuming">aaaa</el-input>
+          <el-input
+                  v-model="form.username"
+                  prefix-icon="iconfont icon-yonghuming"
+                  placeholder="请输入账号"
+          />
         </el-form-item>
+
         <!--   密码-->
         <el-form-item label="密 码" prop="password" style="margin-top: 45px;">
-          <el-input type="password" v-model="form.password" prefix-icon="iconfont icon-mima1"></el-input>
+          <el-input
+                  v-model="form.password"
+                  show-password
+                  prefix-icon="iconfont icon-mima1"
+                  placeholder="请输入密码"
+          />
         </el-form-item>
+
         <!--   按钮-->
         <el-form-item class="footer-btn">
           <el-button type="primary" @click="handleLogin">登 录</el-button>
@@ -33,8 +45,8 @@
         },
         // 验证规则
         rules: {
-          username: [{ validator: this.validate('请输入账号zcy'), trigger: 'blur' }],
-          password: [{ validator: this.validate('请输入密码zcy'), trigger: 'blur' }]
+          username: [{ validator: this.validate('请输入账号'), trigger: 'blur' }],
+          password: [{ validator: this.validate('请输入密码'), trigger: 'blur' }]
         }
       }
     },
@@ -54,7 +66,7 @@
         this.$refs.loginForm.resetFields();
       },
       /**
-       * 登录之前的表单预验证
+       * 登录之前的表单预验证 - 表单实例的validate方法
        * @author zcy
        */
       handleLogin() {
@@ -130,7 +142,7 @@
       border: none;
       border-bottom: 1px solid #e0e0e0;
       color: #383838;
-      font-size: 24px;
+      font-size: 22px;
       padding: 0 0 0 35px;
     }
 
