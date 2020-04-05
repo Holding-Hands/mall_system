@@ -45,8 +45,8 @@
         },
         // 验证规则
         rules: {
-          username: [{ validator: this.validate('请输入账号'), trigger: 'blur' }],
-          password: [{ validator: this.validate('请输入密码'), trigger: 'blur' }]
+          username: [{ validator: this.validate('请输入账号'), trigger: 'blur' ,required: true }],
+          password: [{ validator: this.validate('请输入密码'), trigger: 'blur' ,required: true }]
         }
       }
     },

@@ -116,7 +116,7 @@ import {
 
 Vue.prototype.$ELEMENT = { size: 'small' }; // ELEMENT
 Vue.prototype.$loading = Loading.service; // loading
-Vue.prototype.$msgbox = MessageBox; // msgbox
+Vue.prototype.$messagebox = MessageBox; // msgbox
 Vue.prototype.$alert = MessageBox.alert; // alert
 Vue.prototype.$confirm = MessageBox.confirm; // confirm
 Vue.prototype.$prompt = MessageBox.prompt; // prompt
