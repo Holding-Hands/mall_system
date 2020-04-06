@@ -78,7 +78,6 @@
                 this.$message.error(msg);
                 return
               }
-              console.log(res)
               this.$message.success(msg);
               // 保存token
               window.sessionStorage.setItem('token', res.data.data.token)

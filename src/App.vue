@@ -8,5 +8,6 @@
   @import "assets/css/normalize.css";
   #app {
     height: 100vh;
+    /*min-width: 1366px;*/
   }
 </style>

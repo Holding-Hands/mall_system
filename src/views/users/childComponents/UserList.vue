@@ -32,7 +32,7 @@
           </el-tooltip>
           <!-- 分配角色按钮 -->
           <el-tooltip effect="dark" content="分配角色" placement="top" :enterable="false">
-            <el-button type="warning" icon="el-icon-setting" circle/>
+            <el-button type="warning" icon="el-icon-setting" circle @click="onChangeToggle(scope.row)"/>
           </el-tooltip>
         </template>
       </el-table-column>
@@ -55,6 +55,32 @@
         <el-button type="primary" @click="onConfirm">确 定</el-button>
       </span>
     </el-dialog>
+    <!-- 分配角色弹框 -->
+    <el-dialog
+            title="分配角色"
+            :visible.sync="toggle"
+            width="30%"
+            @close="handleCloseAssignAuthor"
+    >
+      <div>当前用户：{{this.userInfo.username}}</div>
+      <div class="role_name">当前角色：{{this.userInfo.role_name}}</div>
+      <div>分配角色：
+        <el-select v-model="nSelectRoleId" placeholder="请选择">
+          <el-option
+                  v-for="item in rolesList"
+                  :key="item.id"
+                  :label="item.roleName"
+                  :value="item.id"
+                  ref="assignAuthorDialog"
+          >
+          </el-option>
+        </el-select>
+      </div>
+      <span slot="footer">
+        <el-button @click="toggle = false">取 消</el-button>
+        <el-button type="primary" @click="handleConfirm">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -66,7 +92,11 @@
     data() {
       return {
         oEditForm: {}, // 根据id修改后返回的数据
-        oEditFormRules: {} // 编辑表单验证规则
+        oEditFormRules: {}, // 编辑表单验证规则
+        toggle: false, // 分配角色弹框开关
+        userInfo: {}, // 用户信息
+        rolesList: [], // 所有角色列表
+        nSelectRoleId: '' // 选中的角色
       }
     },
     mixins: [mixin],
@@ -145,6 +175,11 @@
       handleResetFiled() {
         this.$refs.editForm.resetFields()
       },
+      /**
+       * 删除数据
+       * @param {Object} row 删除的数据
+       * @author zcy
+       */
       handleRemoveById(row) {
         this.$confirm('是否确定删除此条数据?', '提示', {
           confirmButtonText: '确定',
@@ -164,6 +199,46 @@
         }).catch(() => {
           this.$message({ type: 'info', message: '已取消删除' });
         });
+      },
+      /**
+       * 点击分配角色按钮触发的弹框
+       * @param {Object} row - 当前行的数据
+       * @author zcy
+       */
+      onChangeToggle(row) {
+        this.toggle = !this.toggle;
+        this.userInfo = row;
+        this.$axios.get('/roles').then((res) => {
+          if (res.data.meta.status !== 200) {
+            return this.$message.error('获取角色列表失败');
+          }
+          this.rolesList = res.data.data
+        })
+      },
+      /**
+       * 点击分配角色的确定按钮
+       */
+      handleConfirm() {
+        if (!this.nSelectRoleId) {
+          return this.$message.error('请选择新角色')
+        }
+        this.$axios.put(`/users/${this.userInfo.id}/role`, {
+          rid: this.nSelectRoleId
+        }).then(res => {
+          if (res.data.meta.status !== 200) {
+            this.$message.error('更新角色失败')
+          }
+          this.$message.success('更新角色成功')
+          this.$emit('onRefreshUserList')
+          this.toggle = !this.toggle;
+        })
+      },
+      /**
+       * 处理关闭分配角色弹框
+       */
+      handleCloseAssignAuthor() {
+        this.nSelectRoleId = '';
+        this.userInfo = {};
       }
     }
   }
@@ -190,6 +265,10 @@
 
     .el-table--enable-row-hover .el-table__body tr:hover > td {
       background-color: #f19944;
+    }
+
+    .role_name {
+      margin: 20px 0;
     }
   }
 </style>

@@ -26,7 +26,9 @@
 </template>
 
 <script>
-  import BreadCrumb from "./childComponents/BreadCrumb";
+  // 公共组件
+  import BreadCrumb from "components/content/BreadCrumb";
+  // 子组件
   import AddUserDialog from "./childComponents/AddUserDialog";
   import UserList from "./childComponents/UserList";
   import Search from "./childComponents/Search";
