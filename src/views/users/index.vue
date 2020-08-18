@@ -90,7 +90,7 @@
        * 是否显示添加用户弹框
        */
       handleIsShowAddUserDialog() {
-        this.isShowAddUserDialog = !this.isShowAddUserDialog
+        this.isShowAddUserDialog = !this.isShowAddUserDialog;
       },
       /**
        * 通过查询得到数据
